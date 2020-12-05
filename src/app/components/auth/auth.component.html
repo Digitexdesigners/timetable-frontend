@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<form [formGroup]="authForm">
+<form [formGroup]="authForm" (submit)="onLogin()">
   <mat-card>
     <mat-card-title>Login to proceed</mat-card-title>
     <mat-card-content></mat-card-content>
@@ -19,8 +19,8 @@
       <mat-form-field>
         <mat-label>Select rank</mat-label>
         <mat-select formControlName="rank">
-          <mat-option>Student</mat-option>
-          <mat-option>Lecturer</mat-option>
+          <mat-option value="student">Student</mat-option>
+          <mat-option value="lecturer">Lecturer</mat-option>
         </mat-select>
       </mat-form-field>
     </mat-card-content>

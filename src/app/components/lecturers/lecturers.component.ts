@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LecturersService } from '../../services/lecturers.service';
 
 @Component({
@@ -43,11 +44,18 @@ export class LecturersComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private lecturersService: LecturersService
+    private lecturersService: LecturersService,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.ensureLoggedIn();
     this.getData();
+  }
+
+  ensureLoggedIn() {
+    const session = JSON.parse(localStorage.getItem('session'));
+    if (session.rank && session.rank !== 'lecturer') this.router.navigate(['/auth'])
   }
 
   getData() {

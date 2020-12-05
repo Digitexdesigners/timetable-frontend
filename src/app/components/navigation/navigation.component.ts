@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
+
+  text: string = 'Login';
 
   ngOnInit() {
+    if (localStorage.getItem('session')) this.text = 'Logout';
   }
 
 }

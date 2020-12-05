@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-students',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.ensureLoggedIn();
+  }
+
+  ensureLoggedIn() {
+    const session = JSON.parse(localStorage.getItem('session'));
+    if (session.rank && session.rank !== 'student') this.router.navigate(['/auth'])
   }
 
 }
