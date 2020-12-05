@@ -1,0 +1,13 @@
+form {
+  mat-card {
+    width: 36%; margin: 4% 32%;
+    mat-card-title {
+      font-weight: 200;
+    }
+    mat-card-content {
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}

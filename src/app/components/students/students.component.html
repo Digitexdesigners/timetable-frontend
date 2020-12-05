@@ -1,0 +1,76 @@
+<app-navigation></app-navigation>
+<mat-tab-group>
+  <mat-tab label="Time table">
+    <mat-card>
+      <mat-card-title class="card-title">Today's time table</mat-card-title>
+      <mat-card-content>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col" *ngFor="let item of [1, 2, 3]">
+              <mat-card class="today">
+                <mat-card-subtitle>9:00AM - 11:00AM</mat-card-subtitle>
+                <mat-card-content>Introduction to computer science</mat-card-content>
+                <mat-card-content><b>Venue:</b> SGT1</mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-title class="card-title">Full time table</mat-card-title>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Time</th>
+              <th scope="col">Monday</th>
+              <th scope="col">Tuesday</th>
+              <th scope="col">Wednesday</th>
+              <th scope="col">Thursday</th>
+              <th scope="col">Friday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>9:00AM - 11:00AM</td>
+              <td></td>
+              <td>COMP 401</td>
+              <td></td>
+              <td>MATH 108</td>
+              <td>COSCI 210</td>
+            </tr>
+            <tr>
+              <td>11:00AM - 1:00PM</td>
+              <td>AGED 401</td>
+              <td></td>
+              <td>COSCI 210</td>
+              <td></td>
+              <td>PHIL 104</td>
+            </tr>
+            <tr>
+              <td>1:00PM - 3:00PM</td>
+              <td></td>
+              <td>COMP 401</td>
+              <td></td>
+              <td>MATH 108</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3:00PM - 5:00PM</td>
+              <td>COMP 401</td>
+              <td></td>
+              <td>MATH 108</td>
+              <td></td>
+              <td>COSCI 210</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="My faculties"></mat-tab>
+  <mat-tab label="My departments"></mat-tab>
+  <mat-tab label="My courses"></mat-tab>
+  <mat-tab label="My units"></mat-tab>
+</mat-tab-group>

@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
+$timetable-frontend-primary: mat-palette($mat-indigo);
+$timetable-frontend-accent: mat-palette($mat-gray, 700);
+$timetable-frontend-warn: mat-palette($mat-red);
+$timetable-frontend-theme: mat-light-theme($timetable-frontend-primary, $timetable-frontend-accent, $timetable-frontend-warn);
+@include angular-material-theme($timetable-frontend-theme);
+
+body, html {
+  margin: 0 !important; padding: 0 !important;
+}

@@ -1,0 +1,268 @@
+<app-navigation></app-navigation>
+<mat-tab-group>
+  <mat-tab label="Today's Classes">
+
+    <mat-card>
+      <mat-card-content>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col" *ngFor="let item of [1, 2, 3]">
+              <mat-card class="today">
+                <mat-card-subtitle>9:00AM - 11:00AM</mat-card-subtitle>
+                <mat-card-content>Introduction to computer science</mat-card-content>
+                <mat-card-content><b>Venue:</b> SGT1</mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Faculties">
+    <mat-card class="mb4">
+      <mat-card-subtitle>Add new faculty</mat-card-subtitle>
+      <form [formGroup]="facultyForm" (submit)="onAddFaculty()">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Faculty name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Faculty description</mat-label>
+                <input matInput formControlName="description">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <button type="submit" mat-raised-button color="primary">Add faculty</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+    <mat-card class="mb4">
+      <mat-card-subtitle>Faculties</mat-card-subtitle>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of faculties">
+              <td>{{item.name}}</td>
+              <td>{{item.description}}</td>
+              <td>
+                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteFaculty(item.id)">Delete</button>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Departments">
+    <mat-card class="mb4">
+      <mat-card-subtitle>Add new department</mat-card-subtitle>
+      <form [formGroup]="departmentForm" (submit)="onAddDepartment()">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Department name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Department description</mat-label>
+                <input matInput formControlName="description">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Faculty</mat-label>
+                <mat-select formControlName="faculty_id">
+                  <mat-option *ngFor="let item of faculties" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <button type="submit" mat-raised-button color="primary">Add department</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+    <mat-card class="mb4">
+      <mat-card-subtitle>Departments</mat-card-subtitle>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of departments">
+              <td>{{item.name}}</td>
+              <td>{{item.description}}</td>
+              <td>
+                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteDepartment(item.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Courses">
+    <mat-card class="mb4">
+      <mat-card-subtitle>Add new course</mat-card-subtitle>
+      <form [formGroup]="courseForm" (submit)="onAddCourse()">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Course name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Course description</mat-label>
+                <input matInput formControlName="description">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Department</mat-label>
+                <mat-select formControlName="department_id">
+                  <mat-option *ngFor="let item of departments" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <button type="submit" mat-raised-button color="primary">Add course</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+    <mat-card class="mb4">
+      <mat-card-subtitle>Courses</mat-card-subtitle>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of courses">
+              <td>{{item.name}}</td>
+              <td>{{item.description}}</td>
+              <td>
+                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteCourse(item.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Units">
+    <mat-card class="mb4">
+      <mat-card-subtitle>Add new unit</mat-card-subtitle>
+      <form [formGroup]="unitsForm" (submit)="onAddUnit()">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Unit name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Unit description</mat-label>
+                <input matInput formControlName="description">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Course</mat-label>
+                <mat-select formControlName="course_id">
+                  <mat-option *ngFor="let item of courses" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Day of the week</mat-label>
+                <mat-select formControlName="day">
+                  <mat-option *ngFor="let item of unitDays" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Time</mat-label>
+                <mat-select formControlName="time">
+                  <mat-option *ngFor="let item of unitTimes" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <button type="submit" mat-raised-button color="primary">Add unit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+    <mat-card class="mb4">
+      <mat-card-subtitle>Units</mat-card-subtitle>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Day</th>
+              <th scope="col">Time</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of units">
+              <td>{{item.name}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.day}}</td>
+              <td>{{item.time}}</td>
+              <td>
+                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteUnit(item.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
