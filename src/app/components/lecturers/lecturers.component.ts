@@ -55,7 +55,7 @@ export class LecturersComponent implements OnInit {
 
   ensureLoggedIn() {
     const session = JSON.parse(localStorage.getItem('session'));
-    if (session.rank && session.rank !== 'lecturer') this.router.navigate(['/auth'])
+    // if (session.rank && session.rank !== 'lecturer') this.router.navigate(['/auth'])
   }
 
   getData() {
