@@ -18,7 +18,7 @@ export class StudentsComponent implements OnInit {
 
   ensureLoggedIn() {
     const session = JSON.parse(localStorage.getItem('session'));
-    if (session.rank && session.rank !== 'student') this.router.navigate(['/auth'])
+    // if (typeof session) this.router.navigate(['/auth'])
   }
 
 }
