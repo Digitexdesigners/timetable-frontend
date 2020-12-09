@@ -33,7 +33,6 @@ export class AuthComponent implements OnInit {
     if (!valid) return;
     this.authSerive.login(value).subscribe(
       response => {
-        console.log(response);
         if (response.message) {
           this.snackBar.open(response.message);
           this.authForm.reset();

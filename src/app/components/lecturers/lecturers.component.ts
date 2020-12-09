@@ -32,13 +32,17 @@ export class LecturersComponent implements OnInit {
     description: ['', [Validators.required]],
     day: ['', [Validators.required]],
     time: ['', [Validators.required]],
-    course_id: ['', [Validators.required]]
+    course_id: ['', [Validators.required]],
+    room: ['', [Validators.required]],
+    lecturer_id: []
   });
 
   faculties: any[];
   departments: any[];
   courses: any[];
   units: any[];
+  rooms: any[];
+  classes: any[];
   unitDays: any[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   unitTimes: any[] = ['9:00AM - 11:00AM', '11:00AM - 1:00PM', '1:00PM - 3:00PM', '3:00PM - 5:00PM'];
 
@@ -55,7 +59,11 @@ export class LecturersComponent implements OnInit {
 
   ensureLoggedIn() {
     const session = JSON.parse(localStorage.getItem('session'));
-    // if (session.rank && session.rank !== 'lecturer') this.router.navigate(['/auth'])
+    if (!session) return this.router.navigate(['/auth']);
+    if (!session.id) return this.router.navigate(['/auth']);
+    this.unitsForm.patchValue({
+      lecturer_id: session.id ? session.id : ''
+    });
   }
 
   getData() {
@@ -73,6 +81,14 @@ export class LecturersComponent implements OnInit {
     );
     this.lecturersService.getUnits().subscribe(
       response => this.units = response.result,
+      error => console.log(error)
+    );
+    this.lecturersService.getRooms().subscribe(
+      response => this.rooms = response.result,
+      error => console.log(error)
+    );
+    this.lecturersService.getStudentsTT().subscribe(
+      response => this.classes = response.slice(0, 3),
       error => console.log(error)
     );
   }

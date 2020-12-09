@@ -90,4 +90,23 @@ export class LecturersService {
     return throwError(error);
   }
 
+  getRooms(): Observable<any> {
+    return this.http.get(environment.baseUrl + '/lecturers/rooms').pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getLecturersTT(): Observable<any> {
+    return this.http.get(environment.baseUrl + '/lecturers').pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getStudentsTT(): Observable<any> {
+    return this.http.get(environment.baseUrl + '/lecturers/timetable').pipe(
+      catchError(this.handleError)
+    )
+  }
+
+
 }

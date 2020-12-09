@@ -6,11 +6,11 @@
       <mat-card-content>
         <div class="container-fluid">
           <div class="row">
-            <div class="col" *ngFor="let item of [1, 2, 3]">
+            <div class="col" *ngFor="let item of topClasses">
               <mat-card class="today">
-                <mat-card-subtitle>9:00AM - 11:00AM</mat-card-subtitle>
-                <mat-card-content>Introduction to computer science</mat-card-content>
-                <mat-card-content><b>Venue:</b> SGT1</mat-card-content>
+                <mat-card-subtitle>{{item.time}}</mat-card-subtitle>
+                <mat-card-content>{{item.unit}}</mat-card-content>
+                <mat-card-content><b>Venue:</b>{{item.venue}} <small>{{item.venue_description}}</small></mat-card-content>
               </mat-card>
             </div>
           </div>
@@ -23,46 +23,18 @@
         <table class="table">
           <thead>
             <tr>
+              <th scope="col">Day</th>
               <th scope="col">Time</th>
-              <th scope="col">Monday</th>
-              <th scope="col">Tuesday</th>
-              <th scope="col">Wednesday</th>
-              <th scope="col">Thursday</th>
-              <th scope="col">Friday</th>
+              <th scope="col">Unit</th>
+              <th scope="col">Venue</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>9:00AM - 11:00AM</td>
-              <td></td>
-              <td>COMP 401</td>
-              <td></td>
-              <td>MATH 108</td>
-              <td>COSCI 210</td>
-            </tr>
-            <tr>
-              <td>11:00AM - 1:00PM</td>
-              <td>AGED 401</td>
-              <td></td>
-              <td>COSCI 210</td>
-              <td></td>
-              <td>PHIL 104</td>
-            </tr>
-            <tr>
-              <td>1:00PM - 3:00PM</td>
-              <td></td>
-              <td>COMP 401</td>
-              <td></td>
-              <td>MATH 108</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>3:00PM - 5:00PM</td>
-              <td>COMP 401</td>
-              <td></td>
-              <td>MATH 108</td>
-              <td></td>
-              <td>COSCI 210</td>
+            <tr *ngFor="let item of classes">
+              <td>{{item.day}}</td>
+              <td>{{item.time}}</td>
+              <td>{{item.unit}}</td>
+              <td>{{item.venue}}<br><small>{{item.venue_description}}</small></td>
             </tr>
           </tbody>
         </table>
