@@ -108,5 +108,16 @@ export class LecturersService {
     )
   }
 
+  getResource(resource: string, id: string): Observable<any> {
+    return this.http.get(environment.baseUrl + '/lecturers/findOne/' + resource + '/' + id).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  updateResource(resource: string, id: string, payload: any): Observable<any> {
+    return this.http.patch(environment.baseUrl + '/lecturers/updateOne/' + resource + '/' + id, payload).pipe(
+      catchError(this.handleError)
+    )
+  }
 
 }

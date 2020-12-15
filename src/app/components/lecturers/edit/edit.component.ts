@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LecturersService } from '../../services/lecturers.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LecturersService } from 'src/app/services/lecturers.service';
 
 @Component({
-  selector: 'app-lecturers',
-  templateUrl: './lecturers.component.html',
-  styleUrls: ['./lecturers.component.scss']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss']
 })
-export class LecturersComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   facultyForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
@@ -33,10 +34,12 @@ export class LecturersComponent implements OnInit {
     day: ['', [Validators.required]],
     time: ['', [Validators.required]],
     course_id: ['', [Validators.required]],
-    room: ['', [Validators.required]],
-    lecturer_id: []
+    // room: ['', [Validators.required]],
+    // lecturer_id: []
   });
 
+  resource: string = '';
+  resourceId: string = '';
   faculties: any[];
   departments: any[];
   courses: any[];
@@ -49,12 +52,31 @@ export class LecturersComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private lecturersService: LecturersService,
-    public router: Router
+    public router: Router,
+    private route: ActivatedRoute,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
     this.ensureLoggedIn();
     this.getData();
+    this.route.params.subscribe(params => {
+      this.resource = params.resource;
+      this.resourceId = params.id;
+      this.lecturersService.getResource(params.resource, params.id).subscribe(
+        data => {
+          if (params.resource === 'faculty')
+            this.facultyForm.patchValue({...data[0]});
+          if (params.resource === 'department')
+            this.departmentForm.patchValue({...data[0]});
+          if (params.resource === 'course')
+            this.courseForm.patchValue({...data[0]});
+          if (params.resource === 'unit')
+            this.unitsForm.patchValue({...data[0]});
+        },
+        error => console.log(error)
+      )
+    });
   }
 
   ensureLoggedIn() {
@@ -93,68 +115,18 @@ export class LecturersComponent implements OnInit {
     );
   }
 
-  onAddFaculty() {
-    const { valid, value } = this.facultyForm;
-    if (!valid) return;
-    this.lecturersService.addFaculty(value).subscribe(
-      response => this.getData(),
+  onEditResource() {
+    var payload = {};
+    if (this.resource === 'faculty') payload = this.facultyForm.value;
+    if (this.resource === 'department') payload = this.departmentForm.value;
+    if (this.resource === 'course') payload = this.courseForm.value;
+    if (this.resource === 'unit') payload = this.unitsForm.value;
+    this.lecturersService.updateResource(this.resource, this.resourceId, payload).subscribe(
+      data => {
+        this.snackbar.open(`${this.resource} updated.`, 'Okay')
+      },
       error => console.log(error)
-    );
-  }
-
-  onDeleteFaculty(id: string) {
-    this.lecturersService.deleteFaculty(id).subscribe(
-      response => this.getData(),
-      error => console.log(error)
-    );
-  }
-
-  onAddDepartment() {
-    const { valid, value } = this.departmentForm;
-    if (!valid) return;
-    this.lecturersService.addDepartment(value).subscribe(
-      response => this.getData(),
-      error => console.log(error)
-    );
-  }
-
-  onDeleteDepartment(id: string) {
-    this.lecturersService.deleteDepartent(id).subscribe(
-      response => this.getData(),
-      error => console.log(error)
-    );
-  }
-
-  onAddCourse() {
-    const { valid, value } = this.courseForm;
-    if (!valid) return;
-    this.lecturersService.addCourse(value).subscribe(
-      response => this.getData(),
-      error => console.log(error)
-    );
-  }
-
-  onDeleteCourse(id: string) {
-    this.lecturersService.deleteCourse(id).subscribe(
-      response => this.getData(),
-      error => console.log(error)
-    );
-  }
-
-  onAddUnit() {
-    const { valid, value } = this.unitsForm;
-    if (!valid) return;
-    this.lecturersService.addUnit(value).subscribe(
-      response => this.getData(),
-      error => console.log(error)
-    );
-  }
-
-  onDeleteUnit(id: string) {
-    this.lecturersService.deleteUnit(id).subscribe(
-      response => this.getData(),
-      error => console.log(error)
-    );
+    )
   }
 
 }

@@ -1,0 +1,140 @@
+<app-navigation></app-navigation>
+<mat-card class="container-card" *ngIf="resource === 'faculty'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="facultyForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Faculty name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Faculty description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card class="container-card" *ngIf="resource === 'department'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="departmentForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Department name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Department description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Faculty</mat-label>
+            <mat-select formControlName="faculty_id">
+              <mat-option *ngFor="let item of faculties" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card class="container-card" *ngIf="resource === 'course'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="courseForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Course name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Course description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department_id">
+              <mat-option *ngFor="let item of departments" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card class="container-card" *ngIf="resource === 'unit'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="unitsForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Unit name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Unit description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Course</mat-label>
+            <mat-select formControlName="course_id">
+              <mat-option *ngFor="let item of courses" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Day of the week</mat-label>
+            <mat-select formControlName="day">
+              <mat-option *ngFor="let item of unitDays" [value]="item">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Time</mat-label>
+            <mat-select formControlName="time">
+              <mat-option *ngFor="let item of unitTimes" [value]="item">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>

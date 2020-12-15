@@ -60,7 +60,7 @@
               <td>{{item.name}}</td>
               <td>{{item.description}}</td>
               <td>
-                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/faculty/' + item.id])">Update</button>&nbsp;
                 <button mat-raised-button color="warn" (click)="onDeleteFaculty(item.id)">Delete</button>
               </td>
               <td></td>
@@ -120,7 +120,7 @@
               <td>{{item.name}}</td>
               <td>{{item.description}}</td>
               <td>
-                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/department/' + item.id])">Update</button>&nbsp;
                 <button mat-raised-button color="warn" (click)="onDeleteDepartment(item.id)">Delete</button>
               </td>
             </tr>
@@ -178,7 +178,7 @@
               <td>{{item.name}}</td>
               <td>{{item.description}}</td>
               <td>
-                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/course/' + item.id])">Update</button>&nbsp;
                 <button mat-raised-button color="warn" (click)="onDeleteCourse(item.id)">Delete</button>
               </td>
             </tr>
@@ -233,7 +233,7 @@
               <mat-form-field>
                 <mat-label>Room</mat-label>
                 <mat-select formControlName="room">
-                  <mat-option *ngFor="let item of rooms" [value]="item">{{item.name}}</mat-option>
+                  <mat-option *ngFor="let item of rooms" [value]="item">{{item.name}} <small>{{item.description}}</small></mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -264,7 +264,7 @@
               <td>{{item.day}}</td>
               <td>{{item.time}}</td>
               <td>
-                <button mat-raised-button color="accent">Update</button>&nbsp;
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/unit/' + item.id])">Update</button>&nbsp;
                 <button mat-raised-button color="warn" (click)="onDeleteUnit(item.id)">Delete</button>
               </td>
             </tr>

@@ -12,6 +12,7 @@ import { MaterialImports } from './material-imports';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EditComponent } from './components/lecturers/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthComponent,
     StudentsComponent,
     LecturersComponent,
-    NavigationComponent
+    NavigationComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
