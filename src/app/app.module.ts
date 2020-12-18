@@ -13,6 +13,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditComponent } from './components/lecturers/edit/edit.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EditComponent } from './components/lecturers/edit/edit.component';
     StudentsComponent,
     LecturersComponent,
     NavigationComponent,
-    EditComponent
+    EditComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

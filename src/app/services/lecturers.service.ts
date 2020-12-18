@@ -14,6 +14,12 @@ export class LecturersService {
     private http: HttpClient
   ) {}
 
+  searchTimetable(q: string): Observable<any> {
+    return this.http.get(environment.baseUrl + '/lecturers/search/' + q).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   addFaculty(payload: any): Observable<any> {
     return this.http.post(environment.baseUrl + '/lecturers/faculties', payload).pipe(
       catchError(this.handleError)
