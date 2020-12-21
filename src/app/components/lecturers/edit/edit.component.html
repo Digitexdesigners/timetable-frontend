@@ -138,3 +138,112 @@
     </div>
   </form>
 </mat-card>
+
+<mat-card class="container-card" *ngIf="resource === 'room'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="roomsForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Room name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Room description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Room capacity</mat-label>
+            <input type="number" matInput formControlName="capacity">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card class="container-card" *ngIf="resource === 'time_slot'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="timeSlotsForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Slot day</mat-label>
+            <mat-select formControlName="day">
+              <mat-option *ngFor="let item of unitDays" [value]="item">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Slot time</mat-label>
+            <mat-select formControlName="time">
+              <mat-option *ngFor="let item of unitTimes" [value]="item">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Slot description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card class="container-card" *ngIf="resource === 'lecturer'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="lecturerForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Lecturer name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Lecturer code</mat-label>
+            <input matInput formControlName="code">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Lecturer email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Lecturer mobile</mat-label>
+            <input matInput formControlName="mobile">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Lecturer staff number</mat-label>
+            <input matInput formControlName="staff_no">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>

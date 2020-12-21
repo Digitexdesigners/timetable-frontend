@@ -92,12 +92,44 @@ export class LecturersService {
     )
   }
 
-  private handleError(error: HttpErrorResponse) {
-    return throwError(error);
+  addRoom(payload: any): Observable<any> {
+    return this.http.post(environment.baseUrl + '/lecturers/rooms', payload).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getRooms(): Observable<any> {
     return this.http.get(environment.baseUrl + '/lecturers/rooms').pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  deleteRoom(id: string): Observable<any> {
+    return this.http.delete(environment.baseUrl + '/lecturers/rooms/' + id).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getTimeSlots(): Observable<any> {
+    return this.http.get(environment.baseUrl + '/lecturers/time_slots').pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  deleteTimeSlot(id: string): Observable<any> {
+    return this.http.delete(environment.baseUrl + '/lecturers/time_slots/' + id).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getLecturers(): Observable<any> {
+    return this.http.get(environment.baseUrl + '/lecturers/lecturers').pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  deleteLecturer(id: string): Observable<any> {
+    return this.http.delete(environment.baseUrl + '/lecturers/lecturers/' + id).pipe(
       catchError(this.handleError)
     )
   }
@@ -124,6 +156,10 @@ export class LecturersService {
     return this.http.patch(environment.baseUrl + '/lecturers/updateOne/' + resource + '/' + id, payload).pipe(
       catchError(this.handleError)
     )
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(error);
   }
 
 }

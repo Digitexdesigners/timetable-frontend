@@ -37,12 +37,27 @@ export class LecturersComponent implements OnInit {
     lecturer_id: []
   });
 
+  roomsForm: FormGroup = this.fb.group({
+    name: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    capacity: ['', [Validators.required]]
+  });
+
+  timeSlotsForm: FormGroup = this.fb.group({
+    day: ['', [Validators.required]],
+    time: ['', [Validators.required]],
+    description: ['', [Validators.required]]
+  });
+
   faculties: any[];
   departments: any[];
   courses: any[];
   units: any[];
   rooms: any[];
   classes: any[];
+  allClasses: any[];
+  time_slots: any[];
+  lecturers: any[];
   unitDays: any[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   unitTimes: any[] = ['9:00AM - 11:00AM', '11:00AM - 1:00PM', '1:00PM - 3:00PM', '3:00PM - 5:00PM'];
 
@@ -88,7 +103,15 @@ export class LecturersComponent implements OnInit {
       error => console.log(error)
     );
     this.lecturersService.getStudentsTT().subscribe(
-      response => this.classes = response.slice(0, 3),
+      response => {this.classes = response.slice(0, 3); this.allClasses = response},
+      error => console.log(error)
+    );
+    this.lecturersService.getTimeSlots().subscribe(
+      response => this.time_slots = response.result,
+      error => console.log(error)
+    );
+    this.lecturersService.getLecturers().subscribe(
+      response => this.lecturers = response.result,
       error => console.log(error)
     );
   }
@@ -152,6 +175,36 @@ export class LecturersComponent implements OnInit {
 
   onDeleteUnit(id: string) {
     this.lecturersService.deleteUnit(id).subscribe(
+      response => this.getData(),
+      error => console.log(error)
+    );
+  }
+
+  onAddRoom() {
+    const { valid, value } = this.roomsForm;
+    if (!valid) return;
+    this.lecturersService.addRoom(value).subscribe(
+      response => this.getData(),
+      error => console.log(error)
+    );
+  }
+
+  onDeleteRoom(id: string) {
+    this.lecturersService.deleteRoom(id).subscribe(
+      response => this.getData(),
+      error => console.log(error)
+    );
+  }
+
+  onDeleteTimeSlot(id: string) {
+    this.lecturersService.deleteTimeSlot(id).subscribe(
+      response => this.getData(),
+      error => console.log(error)
+    );
+  }
+
+  onDeleteLecturer(id: string) {
+    this.lecturersService.deleteLecturer(id).subscribe(
       response => this.getData(),
       error => console.log(error)
     );

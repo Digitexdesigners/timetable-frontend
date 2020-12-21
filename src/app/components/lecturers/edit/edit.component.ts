@@ -38,6 +38,26 @@ export class EditComponent implements OnInit {
     // lecturer_id: []
   });
 
+  roomsForm: FormGroup = this.fb.group({
+    name: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    capacity: ['', [Validators.required]]
+  });
+
+  timeSlotsForm: FormGroup = this.fb.group({
+    day: ['', [Validators.required]],
+    time: ['', [Validators.required]],
+    description: ['', [Validators.required]]
+  });
+
+  lecturerForm: FormGroup = this.fb.group({
+    name: ['', [Validators.required]],
+    code: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    mobile: ['', [Validators.required]],
+    staff_no: ['', [Validators.required]]
+  });
+
   resource: string = '';
   resourceId: string = '';
   faculties: any[];
@@ -46,6 +66,7 @@ export class EditComponent implements OnInit {
   units: any[];
   rooms: any[];
   classes: any[];
+  time_slots: any[];
   unitDays: any[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   unitTimes: any[] = ['9:00AM - 11:00AM', '11:00AM - 1:00PM', '1:00PM - 3:00PM', '3:00PM - 5:00PM'];
 
@@ -73,6 +94,12 @@ export class EditComponent implements OnInit {
             this.courseForm.patchValue({...data[0]});
           if (params.resource === 'unit')
             this.unitsForm.patchValue({...data[0]});
+          if (params.resource === 'room')
+            this.roomsForm.patchValue({...data[0]});
+          if (params.resource === 'time_slot')
+            this.timeSlotsForm.patchValue({...data[0]});
+          if (params.resource === 'lecturer')
+            this.lecturerForm.patchValue({...data[0]});
         },
         error => console.log(error)
       )
@@ -113,6 +140,10 @@ export class EditComponent implements OnInit {
       response => this.classes = response.slice(0, 3),
       error => console.log(error)
     );
+    this.lecturersService.getTimeSlots().subscribe(
+      response => this.time_slots = response.result,
+      error => console.log(error)
+    );
   }
 
   onEditResource() {
@@ -121,6 +152,9 @@ export class EditComponent implements OnInit {
     if (this.resource === 'department') payload = this.departmentForm.value;
     if (this.resource === 'course') payload = this.courseForm.value;
     if (this.resource === 'unit') payload = this.unitsForm.value;
+    if (this.resource === 'room') payload = this.roomsForm.value;
+    if (this.resource === 'time_slot') payload = this.timeSlotsForm.value;
+    if (this.resource === 'lecturer') payload = this.lecturerForm.value;
     this.lecturersService.updateResource(this.resource, this.resourceId, payload).subscribe(
       data => {
         this.snackbar.open(`${this.resource} updated.`, 'Okay')

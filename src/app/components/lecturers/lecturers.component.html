@@ -273,4 +273,144 @@
       </mat-card-content>
     </mat-card>
   </mat-tab>
+  <mat-tab label="Rooms">
+    <mat-card class="mb4">
+      <mat-card-subtitle>Add new room</mat-card-subtitle>
+      <form [formGroup]="roomsForm" (submit)="onAddRoom()">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Room name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Room description</mat-label>
+                <input matInput formControlName="description">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Room capacity</mat-label>
+                <input type="number" matInput formControlName="capacity">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <button type="submit" mat-raised-button color="primary">Add room</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+    <mat-card>
+      <mat-card-subtitle>Rooms</mat-card-subtitle>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Capacity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rooms">
+              <td>{{item.name}}</td>
+              <td>{{item.description}}</td>
+              <td>
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/room/' + item.id])">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteRoom(item.id)">Delete</button>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Time Slots">
+    <mat-card class="mb4">
+      <mat-card-subtitle>Time slots</mat-card-subtitle>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Time</th>
+              <th scope="col">Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of time_slots">
+              <td>{{item.day}}</td>
+              <td>{{item.time}}</td>
+              <td>{{item.description}}</td>
+              <td>
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/time_slot/' + item.id])">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteTimeSlot(item.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Lecturer">
+    <mat-card class="mb4">
+      <mat-card-subtitle>Lecturers</mat-card-subtitle>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Code</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Staff Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lecturers">
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.mobile}}</td>
+              <td>{{item.staff_no}}</td>
+              <td>
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/lecturer/' + item.id])">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteLecturer(item.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Timetable">
+    <mat-card>
+      <mat-card-title class="card-title">Full time table</mat-card-title>
+      <mat-card-content>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Time</th>
+              <th scope="col">Unit</th>
+              <th scope="col">Venue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of allClasses">
+              <td>{{item.day}}</td>
+              <td>{{item.time}}</td>
+              <td>{{item.unit}}</td>
+              <td>{{item.venue}}<br><small>{{item.venue_description}}</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
 </mat-tab-group>
