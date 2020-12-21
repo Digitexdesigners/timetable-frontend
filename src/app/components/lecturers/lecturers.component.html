@@ -401,6 +401,7 @@
               <th scope="col">Time</th>
               <th scope="col">Unit</th>
               <th scope="col">Venue</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -409,6 +410,10 @@
               <td>{{item.time}}</td>
               <td>{{item.unit}}</td>
               <td>{{item.venue}}<br><small>{{item.venue_description}}</small></td>
+              <td>
+                <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/timetable/' + item.id])">Update</button>&nbsp;
+                <button mat-raised-button color="warn" (click)="onDeleteTT(item.id)">Delete</button>
+              </td>
             </tr>
           </tbody>
         </table>

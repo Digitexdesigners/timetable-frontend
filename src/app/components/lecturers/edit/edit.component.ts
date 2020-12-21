@@ -58,6 +58,16 @@ export class EditComponent implements OnInit {
     staff_no: ['', [Validators.required]]
   });
 
+  timetableForm: FormGroup = this.fb.group({
+    year: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    semester: ['', [Validators.required]],
+    room_id: ['', [Validators.required]],
+    unit_id: ['', [Validators.required]],
+    slot_id: ['', [Validators.required]],
+    lecturer_id: ['', [Validators.required]]
+  })
+
   resource: string = '';
   resourceId: string = '';
   faculties: any[];
@@ -67,6 +77,7 @@ export class EditComponent implements OnInit {
   rooms: any[];
   classes: any[];
   time_slots: any[];
+  lecturers: any[];
   unitDays: any[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   unitTimes: any[] = ['9:00AM - 11:00AM', '11:00AM - 1:00PM', '1:00PM - 3:00PM', '3:00PM - 5:00PM'];
 
@@ -100,6 +111,8 @@ export class EditComponent implements OnInit {
             this.timeSlotsForm.patchValue({...data[0]});
           if (params.resource === 'lecturer')
             this.lecturerForm.patchValue({...data[0]});
+          if (params.resource === 'timetable')
+            this.timetableForm.patchValue({...data[0]});
         },
         error => console.log(error)
       )
@@ -144,6 +157,10 @@ export class EditComponent implements OnInit {
       response => this.time_slots = response.result,
       error => console.log(error)
     );
+    this.lecturersService.getLecturers().subscribe(
+      response => this.lecturers = response.result,
+      error => console.log(error)
+    );
   }
 
   onEditResource() {
@@ -155,6 +172,7 @@ export class EditComponent implements OnInit {
     if (this.resource === 'room') payload = this.roomsForm.value;
     if (this.resource === 'time_slot') payload = this.timeSlotsForm.value;
     if (this.resource === 'lecturer') payload = this.lecturerForm.value;
+    if (this.resource === 'timetable') payload = this.timetableForm.value;
     this.lecturersService.updateResource(this.resource, this.resourceId, payload).subscribe(
       data => {
         this.snackbar.open(`${this.resource} updated.`, 'Okay')

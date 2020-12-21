@@ -247,3 +247,66 @@
     </div>
   </form>
 </mat-card>
+
+<mat-card class="container-card" *ngIf="resource === 'timetable'">
+  <mat-card-subtitle>Edit {{resource}}</mat-card-subtitle>
+  <form [formGroup]="timetableForm" (submit)="onEditResource()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Year</mat-label>
+            <input matInput formControlName="year">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Semester</mat-label>
+            <input matInput formControlName="semester">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Room</mat-label>
+            <mat-select formControlName="room_id">
+              <mat-option *ngFor="let item of rooms" [value]="item.id">{{item.name}}, {{item.description}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Unit</mat-label>
+            <mat-select formControlName="unit_id">
+              <mat-option *ngFor="let item of units" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Slot</mat-label>
+            <mat-select formControlName="slot_id">
+              <mat-option *ngFor="let item of time_slots" [value]="item.id">{{item.day}} {{item.time}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Lecturer</mat-label>
+            <mat-select formControlName="lecturer_id">
+              <mat-option *ngFor="let item of lecturers" [value]="item.id">{{item.name}}, {{item.code}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <button type="submit" mat-raised-button color="primary">Edit {{resource}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>

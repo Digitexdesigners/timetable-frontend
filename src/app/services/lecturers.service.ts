@@ -146,6 +146,12 @@ export class LecturersService {
     )
   }
 
+  deleteTT(id: string): Observable<any> {
+    return this.http.delete(environment.baseUrl + '/lecturers/timetable/' + id).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   getResource(resource: string, id: string): Observable<any> {
     return this.http.get(environment.baseUrl + '/lecturers/findOne/' + resource + '/' + id).pipe(
       catchError(this.handleError)

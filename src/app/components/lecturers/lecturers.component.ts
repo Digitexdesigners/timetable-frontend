@@ -210,4 +210,11 @@ export class LecturersComponent implements OnInit {
     );
   }
 
+  onDeleteTT(id: string) {
+    this.lecturersService.deleteTT(id).subscribe(
+      response => this.getData(),
+      error => console.log(error)
+    );
+  }
+
 }
