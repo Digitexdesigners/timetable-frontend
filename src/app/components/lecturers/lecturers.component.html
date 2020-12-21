@@ -319,6 +319,7 @@
             <tr *ngFor="let item of rooms">
               <td>{{item.name}}</td>
               <td>{{item.description}}</td>
+              <td>{{item.capacity}}</td>
               <td>
                 <button mat-raised-button color="accent" (click)="router.navigate(['/lecturers/edit/room/' + item.id])">Update</button>&nbsp;
                 <button mat-raised-button color="warn" (click)="onDeleteRoom(item.id)">Delete</button>
